@@ -3,13 +3,11 @@ import net.jini.core.lease.*;
 import java.awt.*;
 import javax.swing.*;
 
-public class PrintJobAdder extends JFrame{
+public class PrintJobAdder extends JFrame {
+
 	private JavaSpace space;
 
-	private JPanel jPanel1, jPanel2;
-	private JLabel jobLabel, jobNumberLabel;
 	private JTextField jobNameIn, jobNumberOut;
-	private JButton addJobButton;
 
 
 	public PrintJobAdder() {
@@ -34,10 +32,10 @@ public class PrintJobAdder extends JFrame{
 		Container cp = getContentPane();
 		cp.setLayout (new BorderLayout ());
 
-		jPanel1 = new JPanel ();
+		JPanel jPanel1 = new JPanel();
 		jPanel1.setLayout (new FlowLayout ());
 
-		jobLabel = new JLabel ();
+		JLabel jobLabel = new JLabel();
 		jobLabel.setText ("Name of file to print ");
 		jPanel1.add (jobLabel);
 
@@ -45,7 +43,7 @@ public class PrintJobAdder extends JFrame{
 		jobNameIn.setText ("");
 		jPanel1.add (jobNameIn);
 
-		jobNumberLabel = new JLabel ();
+		JLabel jobNumberLabel = new JLabel();
 		jobNumberLabel.setText ("Print job number ");
 		jPanel1.add (jobNumberLabel);
 
@@ -54,12 +52,11 @@ public class PrintJobAdder extends JFrame{
 		jobNumberOut.setEditable(false);
 		jPanel1.add (jobNumberOut);
 
-		cp.add (jPanel1, "North");
 
-		jPanel2 = new JPanel ();
+		JPanel jPanel2 = new JPanel();
 		jPanel2.setLayout (new FlowLayout ());
 
-		addJobButton = new JButton();
+		JButton addJobButton = new JButton();
 		addJobButton.setText("Add Print Job");
 		addJobButton.addActionListener (new java.awt.event.ActionListener () {
 			public void actionPerformed (java.awt.event.ActionEvent evt) {
@@ -69,11 +66,12 @@ public class PrintJobAdder extends JFrame{
 
 		jPanel2.add(addJobButton);
 
-		cp.add (jPanel2, "South");
+        cp.add (jPanel1, "North");
+        cp.add (jPanel2, "South");
 	}
 
 
-	public void addJob(java.awt.event.ActionEvent evt){
+	private void addJob(java.awt.event.ActionEvent evt){
 		try {
 			QueueStatus qsTemplate = new QueueStatus();
 			QueueStatus qStatus = (QueueStatus)space.take(qsTemplate,null,Long.MAX_VALUE);
@@ -85,6 +83,7 @@ public class PrintJobAdder extends JFrame{
 			jobNumberOut.setText(""+jobNumber);
 
 			qStatus.addJob();
+
 			space.write( qStatus, null, Lease.FOREVER);
 		}  catch ( Exception e) {
 			e.printStackTrace();
