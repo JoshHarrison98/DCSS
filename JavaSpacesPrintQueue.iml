@@ -10,52 +10,22 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///local/apache-river-2.2.2/lib-dl/reggie-dl.jar!/" />
+          <root url="jar:///local/apache-river-3.0.0/lib/jsk-lib.jar!/" />
+          <root url="jar:///local/apache-river-3.0.0/lib/jsk-platform.jar!/" />
+          <root url="jar:///local/apache-river-3.0.0/lib/outrigger.jar!/" />
+          <root url="jar:///local/apache-river-3.0.0/lib/reggie.jar!/" />
+          <root url="file://$MODULE_DIR$" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/src" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///local/apache-river-2.2.2/lib/jini-core.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar:///local/apache-river-2.2.2/lib/jini-ext.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar:///local/apache-river-2.2.2/lib/outrigger.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar:///local/apache-river-2.2.2/lib/reggie.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar:///local/apache-river-2.2.2/lib/sun-util.jar!/" />
+          <root url="jar:///local/apache-river-3.0.0/lib-dl/reggie-dl.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

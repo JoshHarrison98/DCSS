@@ -4,8 +4,6 @@ import net.jini.core.lookup.ServiceTemplate;
 import net.jini.core.transaction.server.TransactionManager;
 import net.jini.space.JavaSpace;
 
-import java.rmi.RMISecurityManager;
-
 public class SpaceUtils {
 
 	public static JavaSpace getSpace(String hostname) {
@@ -33,7 +31,7 @@ public class SpaceUtils {
 
 	public static TransactionManager getManager(String hostname) {
 		if (System.getSecurityManager() == null) {
-			System.setSecurityManager(new RMISecurityManager());
+			System.setSecurityManager(new SecurityManager());
 		}
 
 		TransactionManager tm = null;
