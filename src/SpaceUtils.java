@@ -7,6 +7,10 @@ import net.jini.space.JavaSpace;
 public class SpaceUtils {
 
 	public static JavaSpace getSpace(String hostname) {
+		if (System.getSecurityManager() == null) {
+			System.setSecurityManager(new SecurityManager());
+		}
+
 		JavaSpace js = null;
 		try {
 			LookupLocator l = new LookupLocator("jini://" + hostname);
