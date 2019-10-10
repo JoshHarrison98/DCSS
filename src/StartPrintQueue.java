@@ -4,7 +4,7 @@ import net.jini.space.JavaSpace;
 public class StartPrintQueue{
     private static final long ONESECOND = 1000;  // one thousand milliseconds
 
-    public static void main(String args[]){
+    public static void main(String[] args){
 
         JavaSpace space = SpaceUtils.getSpace();
 

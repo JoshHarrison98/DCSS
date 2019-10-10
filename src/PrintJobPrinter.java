@@ -43,7 +43,7 @@ public class PrintJobPrinter extends JFrame {
         cp.add(jPanel1,"Center");
     }
 
-    public void processPrintJobs(){
+    private void processPrintJobs(){
         while(true){
             try {
                 QueueItem qiTemplate = new QueueItem();

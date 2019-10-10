@@ -5,6 +5,9 @@ import javax.swing.*;
 
 public class PrintJobAdder extends JFrame {
 
+	private static final long TWO_SECONDS = 2 * 1000;  // two thousand milliseconds
+	private static final long TWO_MINUTES = 2 * 1000 * 60;
+
 	private JavaSpace space;
 
 	private JTextField jobNameIn, jobNumberOut;
@@ -52,7 +55,6 @@ public class PrintJobAdder extends JFrame {
 		jobNumberOut.setEditable(false);
 		jPanel1.add (jobNumberOut);
 
-
 		JPanel jPanel2 = new JPanel();
 		jPanel2.setLayout (new FlowLayout ());
 
@@ -60,7 +62,7 @@ public class PrintJobAdder extends JFrame {
 		addJobButton.setText("Add Print Job");
 		addJobButton.addActionListener (new java.awt.event.ActionListener () {
 			public void actionPerformed (java.awt.event.ActionEvent evt) {
-				addJob (evt);
+				addJob ();
 			}
 		}  );
 
@@ -71,19 +73,26 @@ public class PrintJobAdder extends JFrame {
 	}
 
 
-	private void addJob(java.awt.event.ActionEvent evt){
+	private void addJob(){
 		try {
 			QueueStatus qsTemplate = new QueueStatus();
-			QueueStatus qStatus = (QueueStatus)space.take(qsTemplate,null,Long.MAX_VALUE);
+			QueueStatus qStatus = (QueueStatus)space.take(qsTemplate,null, TWO_SECONDS);
 
+			// if there is no QueueStatus object in the space then we can't do much, so print an error and exit
+			if (qStatus == null){
+				System.out.println("No QueueStatus object found.  Has 'StartPrintQueue' been run?");
+				System.exit(1);
+			}
+
+			// create the new QueueItem, write it to the space, and update the GUI
 			int jobNumber = qStatus.nextJob;
 			String jobName = jobNameIn.getText();
 			QueueItem newJob = new QueueItem(jobNumber, jobName);
-			space.write( newJob, null, Lease.FOREVER);
+			space.write( newJob, null, TWO_MINUTES);
 			jobNumberOut.setText(""+jobNumber);
 
+			// update the QueueStatus object by incrementing the counter and write it back to the space
 			qStatus.addJob();
-
 			space.write( qStatus, null, Lease.FOREVER);
 		}  catch ( Exception e) {
 			e.printStackTrace();
